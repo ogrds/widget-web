@@ -1,5 +1,13 @@
 import axios from "axios";
 
-export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+export const weatherAPI = axios.create({
+  baseURL: "https://api.weatherapi.com/v1",
+});
+
+weatherAPI.interceptors.request.use((config) => {
+  config.params = {
+    key: import.meta.env.VITE_WEATHER_API_KEY,
+    ...config.params,
+  };
+  return config;
 });
